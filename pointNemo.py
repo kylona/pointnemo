@@ -119,7 +119,7 @@ def visualize_points(target_points, candidate_points, most_remote_latlon):
 def main():
     # Check if a filename was provided as a command-line argument
     if len(sys.argv) < 2:
-        print("Usage: python compute_distances.py <filename1> [<filename2> . . .]")
+        print("Usage: python pointNemo.py <filename1> [<filename2> . . .]")
         sys.exit(1)
 
     # The first command-line argument is the filename
