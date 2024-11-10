@@ -84,12 +84,17 @@ def get_spherical_voronoi_points(latlon_points, radius=6378137):
 def find_most_remote_point(candidate_points, target_points):
     distances = {}
 
+    best_dist = 0 
     for i, (lat1, lon1) in enumerate(candidate_points):
         distances[i] = np.inf
         for (lat2, lon2) in target_points:
             dist = geodesic((lat1, lon1), (lat2, lon2)).kilometers
             if dist < distances[i]:
                 distances[i] = dist
+            if distances[i] < best_dist:
+                break # No need to keep searching this won't be furthest
+        if distances[i] > best_dist:
+            best_dist = distances[i]
 
     max_key = max(distances, key=lambda i: distances[i])
     return candidate_points[max_key], distances[max_key]
